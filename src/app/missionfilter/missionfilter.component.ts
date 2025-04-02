@@ -14,6 +14,7 @@ import {FormsModule} from '@angular/forms';
   ],
   styleUrls: ['./missionfilter.component.css']
 })
+// ts-ignore
 export class MissionfilterComponent {
   selectedYear: string = '';
 

@@ -1,5 +1,5 @@
-<app-missionfilter (filterByYear)="onFilterByYear($event)"></app-missionfilter>
 <div style="padding: 10px">
+  <app-missionfilter (filterByYear)="onFilterByYear($event)"></app-missionfilter>
 
   <mat-card class="mission-card" *ngFor="let mission of filteredMissions" style="margin: 20px; align-items: center"
             (click)="viewMission(mission.flight_number)">
