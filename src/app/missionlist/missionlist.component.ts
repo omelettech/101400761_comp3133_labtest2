@@ -1,8 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SpacexService} from '../network/spacexapi.service';
 import {Mission} from '../models/mission.model';
-import {MatCardModule} from '@angular/material/card';
+import {MatCardActions, MatCardModule, MatCardTitle} from '@angular/material/card';
 import {CommonModule} from '@angular/common';
+import {MissionfilterComponent} from '../missionfilter/missionfilter.component';
+import {MatAnchor} from '@angular/material/button';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-missionlist',
@@ -10,18 +13,23 @@ import {CommonModule} from '@angular/common';
   imports: [
     MatCardModule,
     CommonModule,
+    MatCardTitle,
+    MissionfilterComponent,
+    MatAnchor,
+    MatCardActions,
   ],
   templateUrl: './missionlist.component.html',
   styleUrls: ['./missionlist.component.css']
 })
-export class MissionlistComponent {
+export class MissionlistComponent implements OnInit{
   missions: Mission[] = [];
+  filteredMissions: Mission[] = [];
 
-  constructor(private spacexService: SpacexService) {
-  }
+  constructor(private spaceXService: SpacexService, private router: Router) {}
+
 
   ngOnInit(): void {
-    this.spacexService.getLaunches().subscribe((data: Mission[]) => {
+    this.spaceXService.getLaunches().subscribe((data: Mission[]) => {
       if(!data){
         this.missions = [
           {
@@ -44,7 +52,20 @@ export class MissionlistComponent {
       }else{
         // Actual data
         this.missions = data;
+        this.filteredMissions=data
       }
     });
   }
+  onFilterByYear(year: string): void {
+    console.log(year)
+    if (!year) {
+      this.filteredMissions = this.missions; // Show all missions if no year is selected
+    } else {
+      this.filteredMissions = this.missions.filter(mission => mission.launch_year === year);
+    }
+  }
+  viewMission(flightNumber: number): void {
+    this.router.navigate(['/mission', flightNumber]);
+  }
+
 }

@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterModule, RouterOutlet} from '@angular/router';
 import {CommonModule} from '@angular/common';
-import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import {FormsModule} from '@angular/forms';
+import {MissionfilterComponent} from './missionfilter/missionfilter.component';
 
 @Component({
+  imports: [RouterOutlet, RouterModule, CommonModule, MatButtonModule, FormsModule ],
   selector: 'app-root',
-  imports: [RouterOutlet,RouterModule,CommonModule,MatButtonModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'frontend';

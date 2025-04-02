@@ -16,6 +16,9 @@ export class SpacexService {
     return this.http.get<Mission[]>(this.apiUrl);
   }
 
+  getMissions(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
+  }
   // Fetch a single mission by flight number
   getMissionById(flightNumber: number): Observable<Mission> {
     return this.http.get<Mission>(`${this.apiUrl}/${flightNumber}`);
